@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Michelle Doces Delícias — Cardápio</title>
+  <meta name="description"
+    content="Michelle Doces Delícias - Bolos, doces, bombons e encomendas. Faça seu pedido via WhatsApp." />
+  <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+  <div class="logo"><img src="images/logo.png" alt="Michelle Doces Delícias logo" class="brand-logo"></div>
+      <div class="brand-text">
+        <h1>Michelle Doces Delícias</h1>
+        <p>Doces, bolos e bombons artesanais</p>
+      </div>
+    </div>
+    <div class="menu-right">
+      <button id="cartIcon" aria-label="Abrir carrinho" class="cart-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1 3m11-3l2-8M17 13l1 3M5 21a1 1 0 100-2 1 1 0 000 2zm12 0a1 1 0 100-2 1 1 0 000 2z" 
+            stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span id="cartCount" class="cart-count">0</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="categories-row">
+    <div class="container" style="max-width:1100px;margin:12px auto;padding:0 18px;">
+      <nav class="categories-top" id="categoryButtons" aria-label="Categorias"></nav>
+    </div>
+  </section>
+
+  <main>
+    <section class="hero">
+      <h2>Cardápio</h2>
+      <p>Escolha seus doces preferidos e finalize o pedido pelo WhatsApp.</p>
+    </section>
+
+    <section class="products-area">
+      <section class="grid" id="productGrid"></section>
+    </section>
+
+    <!-- Instagram gallery -->
+    <section id="galeria-instagram">
+      <h2>🍰 Nossa Galeria</h2>
+      <p>Siga-nos no <a href="https://www.instagram.com/michelledocesdelicias"
+          target="_blank">@michelledocesdelicias</a></p>
+      <div class="grid-instagram">
+        <img src="images/instagram/post1.png" alt="Post 1"><img src="images/instagram/post2.png" alt="Post 2"><img
+          src="images/instagram/post3.png" alt="Post 3"><img src="images/instagram/post4.png" alt="Post 4"><img
+          src="images/instagram/post5.png" alt="Post 5"><img src="images/instagram/post6.png" alt="Post 6"><img
+          src="images/instagram/post7.png" alt="Post 7"><img src="images/instagram/post8.png" alt="Post 8"><img
+          src="images/instagram/post9.png" alt="Post 9"><img src="images/instagram/post10.png" alt="Post 10"><img
+          src="images/instagram/post11.png" alt="Post 11"><img src="images/instagram/post12.png" alt="Post 12">
+      </div>
+      <div id="lightbox" aria-hidden="true">
+        <button class="close" aria-label="Fechar">&times;</button>
+        <img class="lightbox-content" id="lightbox-img" alt="Imagem ampliada">
+      </div>
+    </section>
+  </main>
+
+  <aside class="cart-panel" id="cartPanel" aria-hidden="true">
+    <h4>Meu Pedido</h4>
+    <div class="cart-items" id="cartItems">
+      <p class="empty">Nenhum item adicionado.</p>
+    </div>
+    <div class="total"><span>Total</span><span id="cartTotal">R$ 0,00</span></div>
+    <div class="cart-actions">
+      <button class="btn-whatsapp" id="checkout">Finalizar Pedido</button>
+    </div>
+  </aside>
+
+  <footer>
+    © <span id="year"></span> Michelle Doces Delícias — Feito com amor 💕
+  </footer>
+
+  <script>window.WHATSAPP_NUMBER = "5531988117518"; window.INIT_PRODUCTS = [{ "id": 1, "category": "Doces Tradicionais", "name": "Brigadeiro", "desc": "Brigadeiro tradicional", "price": 1.25, "img": "/images/brigadeiro.jpg" }, { "id": 2, "category": "Doces Tradicionais", "name": "Beijinho de coco", "desc": "Beijinho de coco macio", "price": 1.25, "img": "/images/beijinho.jpg" }, { "id": 3, "category": "Doces Tradicionais", "name": "Cajuzinho", "desc": "Cajuzinho de amendoim", "price": 1.25, "img": "/images/cajuzinho.jpg" }, { "id": 4, "category": "Doces Tradicionais", "name": "Brigadeiro branco", "desc": "Brigadeiro branco", "price": 1.25, "img": "/images/brigadeiro_branco.jpg" }, { "id": 5, "category": "Doces Tradicionais", "name": "Brigadeiro de ninho", "desc": "Brigadeiro de ninho", "price": 1.25, "img": "/images/brigadeiro_ninho.jpg" }, { "id": 6, "category": "Doces Tradicionais", "name": "Brigadeiro de paçoca", "desc": "Brigadeiro de paçoca", "price": 1.25, "img": "/images/brigadeiro_pacoca.jpg" }, { "id": 7, "category": "Doces Tradicionais", "name": "Moranguinho", "desc": "Moranguinho", "price": 1.25, "img": "/images/moranguinho.jpg" }, { "id": 8, "category": "Doces Tradicionais", "name": "Casadinho", "desc": "Casadinho", "price": 1.25, "img": "/images/casadinho.jpg" }, { "id": 9, "category": "Doces Diferenciados", "name": "Prestígio", "desc": "Prestígio", "price": 1.5, "img": "/images/prestigio.jpg" }, { "id": 10, "category": "Doces Diferenciados", "name": "Doce de leite com coco queimado", "desc": "Doce de leite com coco queimado", "price": 1.5, "img": "/images/doce_leite_coco.jpg" }, { "id": 11, "category": "Doces Diferenciados", "name": "Olho de sogra", "desc": "Olho de sogra", "price": 1.5, "img": "/images/olho_de_sogra.jpg" }, { "id": 12, "category": "Doces Diferenciados", "name": "Filete de damasco", "desc": "Filete de damasco", "price": 1.5, "img": "/images/filete_damasc.jpg" }, { "id": 13, "category": "Doces Diferenciados", "name": "Churros", "desc": "Churros doce", "price": 1.5, "img": "/images/churros.jpg" }, { "id": 14, "category": "Doces Diferenciados", "name": "Ninho com Nutella", "desc": "Ninho com Nutella", "price": 1.5, "img": "/images/ninho_nutella.jpg" }, { "id": 15, "category": "Doces Diferenciados", "name": "Romeu e Julieta", "desc": "Romeu e Julieta", "price": 1.5, "img": "/images/romeu_julieta.jpg" }, { "id": 16, "category": "Doces Diferenciados", "name": "Perolado", "desc": "Perolado", "price": 1.5, "img": "/images/perolado.jpg" }, { "id": 17, "category": "Doces Diferenciados", "name": "Brigadeiro crocante", "desc": "Brigadeiro crocante", "price": 1.5, "img": "/images/brigadeiro_crocante.jpg" }, { "id": 18, "category": "Doces Diferenciados", "name": "Bolo preto e branco", "desc": "Mini bolo preto e branco", "price": 1.5, "img": "/images/bolo_pb.jpg" }, { "id": 19, "category": "Doces Diferenciados", "name": "Surpresa de uva", "desc": "Surpresa de uva", "price": 1.5, "img": "/images/surpresa_uva.jpg" }, { "id": 20, "category": "Doces Diferenciados", "name": "Brigadeiro de café", "desc": "Brigadeiro de café", "price": 1.5, "img": "/images/brigadeiro_cafe.jpg" }, { "id": 21, "category": "Doces Especiais", "name": "Brigadeiro confete", "desc": "Brigadeiro com confete", "price": 1.7, "img": "/images/brigadeiro_confete.jpg" }, { "id": 22, "category": "Doces Especiais", "name": "Brigadeiro de nozes", "desc": "Brigadeiro de nozes", "price": 1.9, "img": "/images/brigadeiro_nozes.jpg" }, { "id": 23, "category": "Doces Especiais", "name": "Amêndoas laminadas", "desc": "Amêndoas laminadas", "price": 1.9, "img": "/images/amendoas_laminadas.jpg" }, { "id": 24, "category": "Doces Especiais", "name": "Brigadeiro 70% cacau", "desc": "Brigadeiro 70% cacau", "price": 1.9, "img": "/images/brigadeiro_70.jpg" }, { "id": 25, "category": "Doces Especiais", "name": "Brigadeiro ao leite", "desc": "Brigadeiro ao leite gourmet", "price": 1.9, "img": "/images/brigadeiro_ao_leite.jpg" }, { "id": 26, "category": "Copinhos", "name": "Copinho Cereja", "desc": "Copinho cereja", "price": 2.9, "img": "/images/copinho_cereja.jpg" }, { "id": 27, "category": "Copinhos", "name": "Copinho Physalis", "desc": "Copinho physalis", "price": 2.9, "img": "/images/copinho_physalis.jpg" }, { "id": 28, "category": "Copinhos", "name": "Copinho Frutas Vermelhas", "desc": "Copinho frutas vermelhas", "price": 2.9, "img": "/images/copinho_frutas.jpg" }, { "id": 29, "category": "Copinhos", "name": "Copinho Figo com Nozes", "desc": "Copinho figo com nozes", "price": 2.9, "img": "/images/copinho_figo.jpg" }, { "id": 30, "category": "Copinhos", "name": "Copinho Maracujá", "desc": "Copinho maracujá", "price": 2.9, "img": "/images/copinho_maracuja.jpg" }, { "id": 31, "category": "Bombons Tradicionais", "name": "Bombom Brigadeiro", "desc": "Bombom brigadeiro", "price": 1.9, "img": "/images/bombom_brigadeiro.jpg" }, { "id": 32, "category": "Bombons Tradicionais", "name": "Bombom Coco", "desc": "Bombom coco", "price": 1.9, "img": "/images/bombom_coco.jpg" }, { "id": 33, "category": "Bombons Tradicionais", "name": "Bombom Uva", "desc": "Bombom uva", "price": 1.9, "img": "/images/bombom_uva.jpg" }, { "id": 34, "category": "Bombons Tradicionais", "name": "Bombom Abacaxi", "desc": "Bombom abacaxi", "price": 1.9, "img": "/images/bombom_abacaxi.jpg" }, { "id": 35, "category": "Bombons Tradicionais", "name": "Bombom Coco com Ameixa", "desc": "Bombom coco com ameixa", "price": 1.9, "img": "/images/bombom_coco_ameixa.jpg" }, { "id": 36, "category": "Bombons Especiais", "name": "Bombom Nozes", "desc": "Bombom nozes", "price": 2.2, "img": "/images/bombom_nozes.jpg" }, { "id": 37, "category": "Bombons Especiais", "name": "Bombom Morango", "desc": "Bombom morango", "price": 3.0, "img": "/images/bombom_morango.jpg" }, { "id": 38, "category": "Bombons Especiais", "name": "Bombom Pistache", "desc": "Bombom pistache", "price": 2.2, "img": "/images/bombom_pistache.jpg" }, { "id": 39, "category": "Bombons Especiais", "name": "Bombom Damasco", "desc": "Bombom damasco", "price": 2.5, "img": "/images/bombom_damasco.jpg" }, { "id": 40, "category": "Bombons Diferenciados", "name": "Bombom Bolinho", "desc": "Bombom bolinho", "price": 2.5, "img": "/images/bombom_bolinho.jpg" }, { "id": 41, "category": "Bombons Diferenciados", "name": "Quadradinho de Castanhas", "desc": "Quadradinho castanhas", "price": 2.8, "img": "/images/quadradinho_castanhas.jpg" }, { "id": 42, "category": "Bombons Diferenciados", "name": "Brownie Bombom", "desc": "Brownie bombom", "price": 2.5, "img": "/images/brownie_bombom.jpg" }, { "id": 43, "category": "Bombons Diferenciados", "name": "Trufa de Chocolate", "desc": "Trufa de chocolate", "price": 2.5, "img": "/images/trufa_chocolate.jpg" }];</script>
+  <script src="app.js" defer></script>
+</body>
+
+</html>
