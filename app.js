@@ -13,7 +13,28 @@ function init(){ renderCategories(); renderProducts(); renderCart(); initCartIco
 
 function getCategories(){ const cats = [...new Set(PRODUCTS.map(p=>p.category))]; return ['Todos', ...cats]; }
 
-function renderCategories(){ const container = byId('categoryButtons'); if(!container) return; container.innerHTML=''; getCategories().forEach(cat=>{ const btn = document.createElement('button'); btn.textContent = cat; btn.className = 'cat-btn'; if(cat === state.category) btn.classList.add('active'); btn.addEventListener('click', ()=>{ state.category = cat; renderProducts(); renderCategories(); }); container.appendChild(btn); }); }
+function renderCategories(){ const container = byId('categoryButtons'); if(!container) return; container.innerHTML=''; getCategories().forEach(cat=>{ const btn = document.createElement('button'); btn.textContent = cat; btn.className = 'cat-btn'; if(cat === state.category) btn.classList.add('active'); btn.addEventListener('click', ()=>{ state.category = cat; renderProducts(); renderCategories(); }); container.appendChild(btn); }); updateCategoriesHeight(); }
+
+
+
+/* Measure categories bar height and update CSS variable so body padding matches
+	 This allows the fixed categories bar to wrap to multiple lines without hiding content. */
+function updateCategoriesHeight(){
+	const el = document.querySelector('.categories-row');
+	if(!el) return;
+	// Measure after layout: use requestAnimationFrame
+	requestAnimationFrame(()=>{
+		const h = Math.ceil(el.getBoundingClientRect().height);
+		document.documentElement.style.setProperty('--categories-height', h + 'px');
+	});
+}
+
+// Recalculate on resize (debounced)
+let _catResizeTimer = null;
+window.addEventListener('resize', ()=>{
+	if(_catResizeTimer) clearTimeout(_catResizeTimer);
+	_catResizeTimer = setTimeout(()=>{ updateCategoriesHeight(); _catResizeTimer = null; }, 120);
+});
 
 function renderProducts(){ const grid = byId('productGrid'); grid.innerHTML=''; const filtered = state.category === 'Todos' ? PRODUCTS : PRODUCTS.filter(p=>p.category === state.category); filtered.forEach(p=>{ const card = document.createElement('article'); card.className = 'card'; const thumb = document.createElement('div'); thumb.className='thumb'; const img = document.createElement('img'); img.src = p.img; img.alt = p.name; thumb.appendChild(img); const meta = document.createElement('div'); meta.className='meta'; meta.innerHTML = `<h3>${p.name}</h3><p>${p.desc}</p><div class="price">${formatBRL(p.price)}</div>`; const actions = document.createElement('div'); actions.className='actions'; const select = document.createElement('select'); [[1,'Unitário'],[25,'25 unidades'],[50,'Meio cento (50)'],[100,'Cento (100)']].forEach(s=>{ const o = document.createElement('option'); o.value = s[0]; o.textContent = s[1]; select.appendChild(o); }); const btn = document.createElement('button'); btn.className='btn'; btn.textContent='Adicionar'; btn.addEventListener('click', ()=> addToCart(p.id, parseInt(select.value))); actions.appendChild(select); actions.appendChild(btn); card.appendChild(thumb); card.appendChild(meta); card.appendChild(actions); grid.appendChild(card); }); }
 
