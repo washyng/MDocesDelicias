@@ -37,6 +37,12 @@ window.addEventListener('resize', () => {
     _catResizeTimer = setTimeout(() => { updateCategoriesHeight(); _catResizeTimer = null; }, 120);
 });
 
+// Calcula o preço baseado na quantidade
+function calculatePrice(basePrice, quantity) {
+    const centoPrice = basePrice * 100; // Preço do cento
+    return (centoPrice * quantity / 100).toFixed(2);
+}
+
 function renderProducts() { 
     const grid = byId('productGrid'); 
     grid.innerHTML = ''; 
@@ -49,7 +55,35 @@ function renderProducts() {
         const img = document.createElement('img'); 
         // Sanitiza URLs e textos
         img.src = Security.validate(p.img); 
-        img.alt = Security.sanitize(p.name); thumb.appendChild(img); const meta = document.createElement('div'); meta.className = 'meta'; meta.innerHTML = `<h3>${p.name}</h3><p>${p.desc}</p><div class="price">${formatBRL(p.price)}</div>`; const actions = document.createElement('div'); actions.className = 'actions'; const select = document.createElement('select');[[1, 'Unitário'], [25, '25 unidades'], [50, 'Meio cento (50)'], [100, 'Cento (100)']].forEach(s => { const o = document.createElement('option'); o.value = s[0]; o.textContent = s[1]; select.appendChild(o); }); const btn = document.createElement('button'); btn.className = 'btn'; btn.textContent = 'Adicionar'; btn.addEventListener('click', () => addToCart(p.id, parseInt(select.value))); actions.appendChild(select); actions.appendChild(btn); card.appendChild(thumb); card.appendChild(meta); card.appendChild(actions); grid.appendChild(card); }); }
+        img.alt = Security.sanitize(p.name); thumb.appendChild(img); const meta = document.createElement('div'); meta.className = 'meta'; const centoPrice = p.price * 100;
+        meta.innerHTML = `
+            <h3>${p.name}</h3>
+            <p>${p.desc}</p>
+            <div class="price-info">
+                <div class="current-price">✨ ${formatBRL(centoPrice)} ✨</div>
+            </div>
+        `;
+        
+        const actions = document.createElement('div');
+        actions.className = 'actions';
+        const select = document.createElement('select');
+        
+        [[100, 'Cento (100)'], [50, 'Meio cento (50)'], [25, '25 unidades']].forEach(s => {
+            const o = document.createElement('option');
+            o.value = s[0];
+            o.textContent = s[1];
+            select.appendChild(o);
+        });
+
+        // Atualiza o preço quando a quantidade é alterada
+        select.addEventListener('change', (e) => {
+            const quantity = parseInt(e.target.value);
+            const price = calculatePrice(p.price, quantity);
+            const priceDisplay = card.querySelector('.current-price');
+            priceDisplay.textContent = formatBRL(price);
+        });
+
+        const btn = document.createElement('button'); btn.className = 'btn'; btn.textContent = 'Adicionar'; btn.addEventListener('click', () => addToCart(p.id, parseInt(select.value))); actions.appendChild(select); actions.appendChild(btn); card.appendChild(thumb); card.appendChild(meta); card.appendChild(actions); grid.appendChild(card); }); }
 
 function addToCart(id, qty) { if (!state.cart[id]) state.cart[id] = 0; state.cart[id] += qty; saveCart(); renderCart(); }
 

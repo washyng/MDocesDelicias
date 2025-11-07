@@ -512,6 +512,55 @@ footer {
         --header-height: 76px;
     }
 
+    /* Layout do card */
+    .card {
+        background: var(--card);
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        min-height: 420px;
+        padding-bottom: 20px;
+    }
+
+    /* Estilos de preço */
+    .price-info {
+        margin: 24px 0 32px;
+        text-align: center;
+        background: #fff0dd;
+        padding: 16px;
+        border-radius: 8px;
+        border: 2px solid #ffd299;
+        box-shadow: 0 2px 4px rgba(230, 126, 34, 0.1);
+    }
+
+    .current-price {
+        color: #d35400;
+        font-weight: 800;
+        font-size: 1.5em;
+        text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        letter-spacing: 0.5px;
+    }
+
+    /* Animação suave ao mudar o preço */
+    .current-price {
+        transition: transform 0.2s ease;
+    }
+    
+    .current-price:hover {
+        transform: scale(1.05);
+    }
+
+    /* Ajuste do espaçamento do botão */
+    .actions {
+        margin-top: auto;
+        padding-top: 16px;
+    }
+
     /* smaller categories bar on narrow screens */
     :root {
         --categories-height: 56px;
